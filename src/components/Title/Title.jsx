@@ -1,8 +1,5 @@
-import { Component } from 'react';
 import Header from './Title.styled';
-class Title extends Component {
-  render() {
-    return <Header>{this.props.title}</Header>;
-  }
-}
+const Title = ({ title }) => {
+  return <Header>{title}</Header>;
+};
 export default Title;

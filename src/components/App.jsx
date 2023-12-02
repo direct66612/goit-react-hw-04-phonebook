@@ -13,7 +13,7 @@ const App = () => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
   const handleSubmit = data => {
-    const { name, number } = data;
+    const { name } = data;
 
     if (
       contacts.some(
@@ -25,8 +25,7 @@ const App = () => {
     }
     const newContact = {
       id: nanoid(),
-      name: name,
-      number: number,
+      ...data,
     };
 
     setContacts(prevState => [...prevState, newContact]);

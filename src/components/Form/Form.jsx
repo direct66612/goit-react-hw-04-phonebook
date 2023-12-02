@@ -1,48 +1,44 @@
-import { Component } from 'react';
 import Container from './Form.styled';
-class Form extends Component {
-  state = {
-    name: '',
-    number: '',
+import { useState } from 'react';
+const Form = ({ handleSubmit }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const NameChange = e => {
+    setName(e.target.value);
   };
-  handleChange = e => {
-    const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
+  const NumberChange = e => {
+    setNumber(e.target.value);
   };
-  resetForm = e => {
+  const resetForm = e => {
     e.preventDefault();
-    this.props.handleSubmit(this.state);
-    this.setState({
-      name: '',
-      number: '',
-    });
+    handleSubmit({ name, number });
+    setName('');
+    setNumber('');
   };
-  render() {
-    return (
-      <Container>
-        <form onSubmit={this.resetForm} className="form">
-          <p className="input__text">Name</p>
-          <input
-            className="input__name"
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-          />
-          <input
-            className="input__tel"
-            type="tel"
-            name="number"
-            value={this.state.number}
-            onChange={this.handleChange}
-            required
-          />
-          <button className="input__btn" type="submit">
-            Add Contact
-          </button>
-        </form>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <form onSubmit={resetForm} className="form">
+        <p className="input__text">Name</p>
+        <input
+          className="input__name"
+          type="text"
+          name="name"
+          value={name}
+          onChange={NameChange}
+        />
+        <input
+          className="input__tel"
+          type="tel"
+          name="number"
+          value={number}
+          onChange={NumberChange}
+          required
+        />
+        <button className="input__btn" type="submit">
+          Add Contact
+        </button>
+      </form>
+    </Container>
+  );
+};
 export default Form;
